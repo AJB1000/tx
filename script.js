@@ -1,8 +1,8 @@
 
-// Enregistrement du Service Worker
+// Enregistrement avec le bon chemin
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-        .then(registration => console.log('SW enregistré'))
+    navigator.serviceWorker.register('/test/sw.js')
+        .then(registration => console.log('SW enregistré:', registration))
         .catch(error => console.log('Échec SW:', error));
 }
 
