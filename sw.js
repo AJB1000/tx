@@ -41,8 +41,16 @@ self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                // Retourne le cache ou fetch en réseau
                 return response || fetch(event.request);
+            })
+            .catch(() => {
+                // Pour les autres fichiers, retourner index.html en fallback
+                if (event.request.destination === 'script' ||
+                    event.request.destination === 'style' ||
+                    event.request.url.includes('manifest.json')) {
+                    return caches.match('./index.html');
+                }
+                return new Response('Offline');
             })
     );
 });
