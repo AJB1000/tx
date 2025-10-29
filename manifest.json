@@ -1,24 +1,21 @@
 {
-  "name": "PWA Coordonnées",
-  "short_name": "CoordsPWA",
-  "description": "Application PWA pour afficher les coordonnées GPS",
-  "start_url": "./index.html",
+  "name": "Ma Carte",
+  "short_name": "Carte",
+  "description": "Affiche les coordonnées depuis l'URL",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
-  "orientation": "portrait",
+  "theme_color": "#3367d6",
   "icons": [
-      {
-          "src": "./icons/icon-192.png",
-          "sizes": "192x192",
-          "type": "image/png",
-          "purpose": "any maskable"
-      },
-      {
-          "src": "./icons/icon-512.png",
-          "sizes": "512x512",
-          "type": "image/png",
-          "purpose": "any maskable"
-      }
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }

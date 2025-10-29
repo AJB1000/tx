@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWA Coordonnées</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f0f0f0;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .coord {
-            font-size: 18px;
-            margin: 10px 0;
-            padding: 10px;
-            background: #e8f4fd;
-            border-radius: 5px;
-        }
-        .status {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-        }
-        .online { background: #4CAF50; color: white; }
-        .offline { background: #f44336; color: white; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carte</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .info {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-    <div id="status" class="status"></div>
-    <div class="container">
-        <h1>📱 Coordonnées GPS</h1>
-        <div class="coord">Longitude: <span id="lon">-</span></div>
-        <div class="coord">Latitude: <span id="lat">-</span></div>
-        <div class="coord">Dernière mise à jour: <span id="time">-</span></div>
-    </div>
+  <h1>Coordonnées</h1>
+  <div class="info">
+    <p><strong>Latitude :</strong> <span id="lat">—</span></p>
+    <p><strong>Longitude :</strong> <span id="lon">—</span></p>
+    <p><em>État : <span id="status">Chargement...</span></em></p>
+  </div>
 
-    <script src="script.js"></script>
+  <script>
+    // Enregistrement du Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .catch(console.error);
+    }
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
