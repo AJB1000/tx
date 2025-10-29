@@ -1,49 +1,65 @@
-const CACHE_NAME = 'pwa-params-v3';
+const CACHE_NAME = 'pwa-coords-v2';
 const urlsToCache = [
-    '/test/',
-    '/test/index.html',
-    '/test/manifest.json',
-    '/test/sw.js'
+    './',
+    './index.html',
+    './script.js',
+    './manifest.json',
+    './icons/icon-192.png',
+    './icons/icon-512.png'
 ];
 
+// Installation - mise en cache
 self.addEventListener('install', event => {
+    console.log('🛠️ Service Worker installation');
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Cache ouvert, ajout des URLs:', urlsToCache);
+                console.log('📦 Mise en cache des fichiers');
                 return cache.addAll(urlsToCache);
             })
+            .then(() => {
+                console.log('✅ Tous les fichiers sont en cache');
+                return self.skipWaiting();
+            })
     );
-    self.skipWaiting();
 });
 
+// Interception des requêtes
 self.addEventListener('fetch', event => {
+    // Pour les navigations, toujours servir index.html depuis le cache
+    if (event.request.mode === 'navigate') {
+        event.respondWith(
+            caches.match('./index.html')
+                .then(response => {
+                    return response || fetch(event.request);
+                })
+        );
+        return;
+    }
+
+    // Pour les autres ressources
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).catch(() => {
-                    // Retourne une page offline basique si échec
-                    return new Response('Mode hors ligne - Paramètres non disponibles');
-                });
+                // Retourne le cache ou fetch en réseau
+                return response || fetch(event.request);
             })
     );
 });
 
+// Activation
 self.addEventListener('activate', event => {
+    console.log('🎉 Service Worker activé');
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheName !== CACHE_NAME) {
-                        console.log('Suppression ancien cache:', cacheName);
+                        console.log('🗑️ Suppression ancien cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim())
     );
-    self.clients.claim();
 });
