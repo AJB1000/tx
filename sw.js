@@ -1,6 +1,6 @@
 // sw.js — Cache minimal pour fonctionner hors ligne
 
-const CACHE_NAME = 'pwa-coords-v4';
+const CACHE_NAME = 'pwa-coords-v5';
 const urlsToCache = [
     '/',
     '/index.html',
@@ -36,7 +36,7 @@ self.addEventListener('fetch', (event) => {
     // Lorsqu'on cherche une page HTML
     if (event.request.mode === "navigate") {
         // On renvoie à la page index.html
-        event.respondWith(caches.match("/"));
+        event.respondWith(caches.match("/index.html"));
         return;
     }
 
