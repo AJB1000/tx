@@ -38,7 +38,7 @@ self.addEventListener('fetch', (event) => {
 
     if (url.pathname === '/' || url.pathname === '/index.html') {
         event.respondWith(
-            caches.match('/index.html')
+            caches.match('/')
                 .then(response => response || fetch(event.request))
         );
         return;
