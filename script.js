@@ -5,6 +5,8 @@ function displayCoords() {
     const lat = urlParams.get('lat');
     const lon = urlParams.get('lon');
 
+    console.log(lat)
+
     document.getElementById('lat').textContent = lat || '—';
     document.getElementById('lon').textContent = lon || '—';
     document.getElementById('status').textContent =
