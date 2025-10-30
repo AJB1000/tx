@@ -1,11 +1,11 @@
 // sw.js — Cache minimal pour fonctionner hors ligne
 
-const CACHE_NAME = 'pwa-coords-v55';
+const CACHE_NAME = 'pwa-coords-v155';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/script.js',
-    '/manifest.json'
+    './',
+    './index.html',
+    './script.js',
+    './manifest.json'
 ];
 
 // Installation : cache les ressources
