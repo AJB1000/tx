@@ -2,7 +2,7 @@
 
 const CACHE_NAME = 'v4';
 const urlsToCache = [
-    '',
+    '/',
     '/index.html',
     '/script.js',
     '/manifest.json'
