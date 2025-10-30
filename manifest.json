@@ -1,5 +1,5 @@
 {
-  "name": "Ma Carte",
+  "name": "qwen",
   "short_name": "Carte",
   "description": "Affiche les coordonnées depuis l'URL",
   "start_url": "/",
