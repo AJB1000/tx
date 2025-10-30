@@ -1,6 +1,6 @@
 // sw.js — Cache minimal pour fonctionner hors ligne
 
-const CACHE_NAME = '2';
+const CACHE_NAME = 'v2';
 const urlsToCache = [
     './',
     './index.html',
@@ -36,7 +36,7 @@ self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
     if (url.origin !== self.location.origin) return;
 
-    if (url.pathname === '/' || url.pathname === '/index.html') {
+    if (url.pathname === '/' || url.pathname === './index.html') {
         event.respondWith(
             caches.match('./index.html')
                 .then(response => response || fetch(event.request))
